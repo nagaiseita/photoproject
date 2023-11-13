@@ -1,0 +1,32 @@
+<!--ベーステンプレートを適用する-->
+{% extends 'base.html' %}
+<!--タブの表示名-->
+{% block title %}Photo Detail{% endblock %}
+<!--メイン-->
+{% block contents %}
+<br>
+<div class="container">
+    <!-- タイトル -->
+    <h2>{{object.title}}</h2>
+    <!-- コメント -->
+    <p>{{object.comment}}</p>
+    <!-- 投稿日時 -->
+    <br>
+    <p>{{object.posted_at}}に投稿</p>
+    <!-- 1枚目の写真 -->
+    <p><img src="{{object.image1.url}}"></p>
+    <!-- 2枚目の写真があれば表示 -->
+    {% if object.image2 %}
+        <p><img src="{{object.image2.url}}"></p>
+    {% endif%}
+    <!--投稿写真がログイン中のユーザのものであれば
+    　　削除ボタンを表示-->
+    {% if request.user == object.user %}
+        <form method='post'>
+            <a href={% url 'photo:photo_delete' object.pk %}
+                class="btn btn-primary my-2">削除する</a>
+        </form>
+    {% endif %}
+
+</div>
+{% endblock %}

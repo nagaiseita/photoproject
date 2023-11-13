@@ -1,0 +1,20 @@
+<!--ベーステンプレートを適用する-->
+{% extends 'base.html' %}
+<!--タブの表示名-->
+{% block title %}Photo Delete{% endblock %}
+<!--メイン-->
+{% block contents %}
+    <br>
+    <div class="container">
+        <form method="post">
+            {% csrf_token %}
+            <br>
+            <p>削除してもいいですか?</p>
+            <button class="btn btn-primary my-2"
+                    type="submit">削除</button>
+            
+            <a href="{% url 'photo:photo_detail' object.pk %}"
+                class="btn btn-secondary my-2">キャンセル</a>           
+        </form>
+    </div>
+{% endblock %}
